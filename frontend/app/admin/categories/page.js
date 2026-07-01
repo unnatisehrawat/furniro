@@ -1,0 +1,44 @@
+"use client"
+import axios from "axios";
+
+
+import { useEffect, useState } from "react";
+import CategoryTable from "../components/CategoryTable";
+import AddCategoryModal from "../components/AddCategoryModal";
+
+export default function Category(){
+    const [categories , setCategories] = useState([]);
+    const [open , setOpen ] = useState(false);
+
+    async function getCategories(){
+    const res = await axios.get("http://localhost:5000/api/categories");
+    setCategories(res.data);
+}
+
+    useEffect(() => {
+        getCategories();
+    } , [])
+
+    return(
+        <>
+       <div className="flex justify-between items-center mb-8">
+        <div className="mx-4 mt-4">
+            <h1 className="text-3xl font-bold"> Category Management</h1>
+            <p className="text-gray-500 mt-3">Organise and manage categories</p>
+        </div>
+        <button className="mx-8 text-white bg-[#6E4C3A] px-4 py-2 cursor-pointer rounded-2xl"
+        onClick={() => setOpen(true)}>
+            + Add Category
+
+        </button>
+       </div>
+
+       <CategoryTable categories ={categories} refresh = {getCategories} />
+
+
+       {open && (
+        <AddCategoryModal  close = {() => setOpen(false)} refresh = {getCategories}/>
+       )}
+        </>
+    )
+}
