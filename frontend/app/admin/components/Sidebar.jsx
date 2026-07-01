@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Package, Grid2X2, User } from "lucide-react"
+import { Package, Grid2X2, User, Mail, LayoutDashboard } from "lucide-react"
 
 
 
@@ -10,6 +10,11 @@ export default function Sidebar() {
     const pathname = usePathname()
 
     const menuItems = [
+        {
+            name: "Dashboard",
+            href: "/admin/dashboard",
+            icon: <LayoutDashboard size={18} />
+        },
         {
             name: "Categories",
             href: "/admin/categories",
@@ -21,6 +26,11 @@ export default function Sidebar() {
             href: "/admin/products",
             icon: <Package size={18} />
 
+        },
+        {
+            name: "Leads",
+            href: "/admin/leads",
+            icon: <Mail size={18} />
         }
     ];
 

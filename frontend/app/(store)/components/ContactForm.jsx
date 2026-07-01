@@ -2,25 +2,47 @@
 
 import { MapPin, Phone, Clock } from "lucide-react"
 import { useState } from "react";
+import axios from "axios";
 
 export default function ContactForm(){
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
 
-    const handleSubmit = (e) => {
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (!formData.name || !formData.email || !formData.message) {
+            alert("Please fill in all required fields (Name, Email, Message)");
+            return;
+        }
+
         setIsSubmitting(true);
         
-        // Simulating an API call delay
-        setTimeout(() => {
-            setIsSubmitting(false);
+        try {
+            await axios.post("http://localhost:5000/api/leads", formData);
             alert("Message sent successfully!");
-        }, 2000);
+            setFormData({ name: "", email: "", subject: "", message: "" });
+        } catch (error) {
+            console.error("Failed to send message:", error);
+            alert("Failed to send message. Please try again later.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return(
         <section className="max-w-7xl mx-auto py-24 px-6 md:px-12">
             
-            {/* Header Text */}
+            
             <div className="text-center max-w-2xl mx-auto mb-20">
                 <h2 className="text-4xl font-bold mb-4">Get In Touch With Us</h2>
                 <p className="text-gray-400">
@@ -30,7 +52,7 @@ export default function ContactForm(){
 
             <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
                 
-                {/* Left Side: Contact Info */}
+                
                 <div className="flex-1 flex flex-col gap-10 max-w-md mx-auto lg:mx-0">
                     <div className="flex gap-6 items-start group">
                         <MapPin size={28} className="text-black shrink-0 mt-1 group-hover:text-[#B88E2F] transition-colors" />
@@ -57,15 +79,19 @@ export default function ContactForm(){
                     </div>
                 </div>
 
-                {/* Right Side: Contact Form */}
+                
                 <div className="flex-1 max-w-xl mx-auto lg:mx-0 w-full">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                         <div>
                             <label className="block text-black font-medium mb-4">Your name</label>
                             <input 
                                 type="text" 
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                                 placeholder="Enter your name" 
                                 className="w-full border border-gray-300 rounded-lg px-6 py-5 outline-none focus:border-[#B88E2F] focus:ring-1 focus:ring-[#B88E2F] transition-all" 
+                                required
                             />
                         </div>
                         
@@ -73,8 +99,12 @@ export default function ContactForm(){
                             <label className="block text-black font-medium mb-4">Email address</label>
                             <input 
                                 type="email" 
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 placeholder="Enter your email" 
                                 className="w-full border border-gray-300 rounded-lg px-6 py-5 outline-none focus:border-[#B88E2F] focus:ring-1 focus:ring-[#B88E2F] transition-all" 
+                                required
                             />
                         </div>
                         
@@ -82,6 +112,9 @@ export default function ContactForm(){
                             <label className="block text-black font-medium mb-4">Subject</label>
                             <input 
                                 type="text" 
+                                name="subject"
+                                value={formData.subject}
+                                onChange={handleChange}
                                 placeholder="Enter the subject(optional)" 
                                 className="w-full border border-gray-300 rounded-lg px-6 py-5 outline-none focus:border-[#B88E2F] focus:ring-1 focus:ring-[#B88E2F] transition-all" 
                             />
@@ -91,8 +124,12 @@ export default function ContactForm(){
                             <label className="block text-black font-medium mb-4">Message</label>
                             <textarea 
                                 rows="4" 
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
                                 placeholder="Enter your message" 
                                 className="w-full border border-gray-300 rounded-lg px-6 py-5 outline-none focus:border-[#B88E2F] focus:ring-1 focus:ring-[#B88E2F] transition-all resize-none"
+                                required
                             ></textarea>
                         </div>
                         
