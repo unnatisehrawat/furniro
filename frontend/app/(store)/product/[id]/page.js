@@ -32,7 +32,7 @@ export default function ProductPage() {
 
     async function handleAddToCart() {
         try {
-            await axios.post("http://localhost:5000/api/cart", { productId: id, quantity })
+            await axios.post("http://localhost:5000/api/cart", { productId: id, quantity }, { withCredentials: true })
             refreshCartCount();
             alert("Added to cart!")
         } catch (error) {

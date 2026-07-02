@@ -4,9 +4,11 @@ import axios from "axios"
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react";
+import { useCart } from "@/app/context/CartContext";
 
 export default function RelatedProducts({ categoryId, currentProductId }) {
     const [products, setProducts] = useState([]);
+    const { refreshCartCount } = useCart();
 
     useEffect(() => {
         if (categoryId) {
@@ -29,7 +31,8 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
 
     async function handleAddToCart(productId) {
         try {
-            await axios.post("http://localhost:5000/api/cart", { productId });
+            await axios.post("http://localhost:5000/api/cart", { productId }, { withCredentials: true });
+            refreshCartCount();
             alert("Added to cart!");
         } catch (error) {
             console.log(error);

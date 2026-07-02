@@ -21,10 +21,10 @@ export default function Leads() {
 
     return (
         <>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
                 <div className="mx-4 mt-4">
-                    <h1 className="text-3xl font-bold">Leads Management</h1>
-                    <p className="text-gray-500 mt-3">View and manage customer contact submissions</p>
+                    <h1 className="text-3xl font-bold text-gray-800">Leads Management</h1>
+                    <p className="text-gray-500 mt-2">View and manage customer contact submissions</p>
                 </div>
             </div>
 

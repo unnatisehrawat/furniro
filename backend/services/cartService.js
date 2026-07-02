@@ -1,24 +1,19 @@
 import Cart from "../models/cart.js";
 
-export const getCart = async () => {
-  console.log("222222222222222")
-  // return await Cart.findOne().populate("items.productId", "name price image");
-
-    const result =  await Cart.findOne().populate("items.productId");
-    console.log("thisis result ========================== ", result)
+export const getCart = async (userId) => {
+    const result = await Cart.findOne({ userId }).populate("items.productId");
     return result
-
 };
 
 
 
 
-export const addToCart = async (productId) => {
-  let cart = await Cart.findOne();
+export const addToCart = async (userId, productId) => {
+  let cart = await Cart.findOne({ userId });
 
  
   if (!cart) {
-    cart = new Cart({ items: [] });
+    cart = new Cart({ userId, items: [] });
   }
 
   // Check if product already exists in the cart
@@ -37,8 +32,8 @@ export const addToCart = async (productId) => {
 };
 
 
-export const removeFromCart = async (productId) => {
-  const cart = await Cart.findOne();
+export const removeFromCart = async (userId, productId) => {
+  const cart = await Cart.findOne({ userId });
   if (!cart) return null;
 
   cart.items = cart.items.filter(
@@ -49,8 +44,8 @@ export const removeFromCart = async (productId) => {
 };
 
 
-export const clearCart = async () => {
-  const cart = await Cart.findOne();
+export const clearCart = async (userId) => {
+  const cart = await Cart.findOne({ userId });
   if (!cart) return null;
 
   cart.items = [];

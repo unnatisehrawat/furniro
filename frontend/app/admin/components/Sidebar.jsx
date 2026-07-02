@@ -2,34 +2,33 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Package, Grid2X2, User, Mail, LayoutDashboard } from "lucide-react"
-import { TEXT } from "@/constants/text"
-
-
+import { Package, Grid2X2, User, Mail, LayoutDashboard, LogOut } from "lucide-react"
+import { useAuth } from "@/app/context/AuthContext"
 
 export default function Sidebar() {
     const pathname = usePathname()
+    const { logout } = useAuth()
 
     const menuItems = [
         {
-            name: TEXT.ADMIN_SIDEBAR.LINKS.DASHBOARD,
+            name: "Dashboard",
             href: "/admin/dashboard",
             icon: <LayoutDashboard size={18} />
         },
         {
-            name: TEXT.ADMIN_SIDEBAR.LINKS.CATEGORIES,
+            name: "Categories",
             href: "/admin/categories",
             icon: <Grid2X2 size={18} />
         },
         {
 
-            name: TEXT.ADMIN_SIDEBAR.LINKS.PRODUCTS,
+            name: "Products",
             href: "/admin/products",
             icon: <Package size={18} />
 
         },
         {
-            name: TEXT.ADMIN_SIDEBAR.LINKS.LEADS,
+            name: "Leads",
             href: "/admin/leads",
             icon: <Mail size={18} />
         }
@@ -40,9 +39,9 @@ export default function Sidebar() {
             <aside className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col justify-between sticky top-0">
                 <div>
                     <div className="px-8 py-6">
-                        <h1 className="text-3xl font-bold tracking-wide text-admin-brand "> {TEXT.ADMIN_SIDEBAR.LOGO}</h1>
+                        <h1 className="text-3xl font-bold tracking-wide text-admin-brand "> FURNIRO</h1>
                         <p className="text-sm text-gray-500 mt-1">
-                            {TEXT.ADMIN_SIDEBAR.SUBTITLE}
+                            Admin Portal
                         </p>
                     </div>
                     <nav className="px-4 flex flex-col space-y-2">
@@ -65,19 +64,25 @@ export default function Sidebar() {
                         })}
                     </nav>
                 </div>
-                <div className="text-gray-600 font-semibold flex items-center  gap-6 border-t border-gray-200 p-6">
-                    <div className=" w-10 h-10 flex items-center justify-center rounded-full bg-admin-brand text-white">
-                        <User size={18} />
+                
+                <div className="flex items-center justify-between border-t border-gray-200 p-6">
+                    <div className="flex items-center gap-4 text-gray-600 font-semibold">
+                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-admin-brand text-white">
+                            <User size={18} />
+                        </div>
+                        <h3> Admin User</h3>
                     </div>
-
-                    <h3> {TEXT.ADMIN_SIDEBAR.USER}</h3>
+                    
+                    <button 
+                        onClick={logout} 
+                        className="text-gray-500 hover:text-red-500 transition cursor-pointer"
+                        title="Logout"
+                    >
+                        <LogOut size={20} />
+                    </button>
                 </div>
 
-
-
             </aside>
-
-
         </>
     )
 }

@@ -11,7 +11,7 @@ export default function CartTable(){
 
     async function getCart(){
         try {
-            const { data } = await axios.get("http://localhost:5000/api/cart") 
+            const { data } = await axios.get("http://localhost:5000/api/cart", { withCredentials: true }) 
             setCart(data)
         } catch (error) {
             alert('failed to fetch cart')
@@ -21,7 +21,7 @@ export default function CartTable(){
 
     async function removeFromCart(productId) {
         try {
-            await axios.delete(`http://localhost:5000/api/cart/${productId}`)
+            await axios.delete(`http://localhost:5000/api/cart/${productId}`, { withCredentials: true })
             getCart()   
         } catch (error) {
             console.log(error)

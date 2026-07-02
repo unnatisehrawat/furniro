@@ -1,6 +1,6 @@
-"use client";
-import axios from "axios"
-import { useRouter } from "next/navigation"
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
 
 export default function LeadTable({ leads, refresh }) {
     const router = useRouter();
@@ -9,8 +9,7 @@ export default function LeadTable({ leads, refresh }) {
         if (!window.confirm("Are you sure you want to delete this lead?")) return;
         
         try {
-            await axios.delete(`http://localhost:5000/api/leads/${id}`)
-            console.log("Lead Deleted Successfully")
+            await axios.delete(`http://localhost:5000/api/leads/${id}`, { withCredentials: true })
             refresh()
         } catch (error) {
             console.log(error)
@@ -19,52 +18,59 @@ export default function LeadTable({ leads, refresh }) {
     }
 
     return (
-        <>
-            <div className="p-6 overflow-x-auto">
-                <table className="w-full border border-gray-300">
-                    <thead className="text-white bg-admin-brand">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mx-4">
+            <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                    <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider font-semibold">
                         <tr>
-                            <th className="p-4 border border-gray-300">S.No</th>
-                            <th className="border border-gray-300">Date</th>
-                            <th className="border border-gray-300 p-4">Name</th>
-                            <th className="border border-gray-300 p-4">Email</th>
-                            <th className="border border-gray-300 p-4">Subject</th>
-                            <th className="border border-gray-300 p-4 max-w-xs">Message</th>
-                            <th className="border border-gray-300">Actions</th>
+                            <th className="p-4 border-b border-gray-100 w-16 text-center">S.No</th>
+                            <th className="p-4 border-b border-gray-100">Date</th>
+                            <th className="p-4 border-b border-gray-100">Name</th>
+                            <th className="p-4 border-b border-gray-100">Email</th>
+                            <th className="p-4 border-b border-gray-100">Subject</th>
+                            <th className="p-4 border-b border-gray-100">Message</th>
+                            <th className="p-4 border-b border-gray-100 text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-sm">
                         {leads.map((lead, index) => (
                             <tr 
                                 key={lead._id} 
                                 onClick={() => router.push(`/admin/leads/${lead._id}`)}
-                                className="border border-gray-300 text-center hover:bg-gray-50 transition-colors cursor-pointer"
+                                className="hover:bg-gray-50/80 transition-colors border-b border-gray-50 last:border-0 cursor-pointer"
                             >
-                                <td className="border border-gray-300 p-4 w-12">{index + 1}</td>
-                                <td className="border border-gray-300 p-4 whitespace-nowrap text-sm text-gray-500">
-                                    {new Date(lead.createdAt).toLocaleDateString()}
+                                <td className="p-4 text-center text-gray-400 font-medium">{index + 1}</td>
+                                <td className="p-4 text-gray-500 whitespace-nowrap">
+                                    {new Date(lead.createdAt).toLocaleDateString(undefined, {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: 'numeric'
+                                    })}
                                 </td>
-                                <td className="border border-gray-300 p-4 font-medium">
+                                <td className="p-4 font-medium text-gray-800">
                                     {lead.name}
                                 </td>
-                                <td className="border border-gray-300 p-4 text-blue-600">
-                                    <a href={`mailto:${lead.email}`} onClick={(e) => e.stopPropagation()}>{lead.email}</a>
+                                <td className="p-4 text-admin-brand">
+                                    <a href={`mailto:${lead.email}`} onClick={(e) => e.stopPropagation()} className="hover:underline">
+                                        {lead.email}
+                                    </a>
                                 </td>
-                                <td className="border border-gray-300 p-4 font-semibold text-gray-700">
-                                    {lead.subject || "No Subject"}
+                                <td className="p-4 font-medium text-gray-700">
+                                    {lead.subject || <span className="text-gray-400 italic">No Subject</span>}
                                 </td>
-                                <td className="border border-gray-300 p-4 text-left max-w-xs truncate" title={lead.message}>
+                                <td className="p-4 text-gray-500 max-w-[200px] truncate" title={lead.message}>
                                     {lead.message}
                                 </td>
-                                <td className="border border-gray-300 p-4">
+                                <td className="p-4 text-center">
                                     <button 
-                                        className="text-red-500 cursor-pointer font-medium hover:text-red-700 transition"
+                                        className="text-gray-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-full transition-all cursor-pointer inline-flex items-center justify-center"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             deleteLead(lead._id);
                                         }}
+                                        title="Delete Lead"
                                     >
-                                        Delete
+                                        <Trash2 size={18} />
                                     </button>
                                 </td>
                             </tr>
@@ -72,12 +78,12 @@ export default function LeadTable({ leads, refresh }) {
                         
                         {leads.length === 0 && (
                             <tr>
-                                <td colSpan="7" className="p-8 text-gray-500 text-lg">No leads found.</td>
+                                <td colSpan="7" className="p-8 text-center text-gray-400 italic">No leads found. When customers contact you, they will appear here!</td>
                             </tr>
                         )}
                     </tbody>
                 </table>
             </div>
-        </>
-    )
+        </div>
+    );
 }

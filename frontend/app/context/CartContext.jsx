@@ -9,19 +9,19 @@ export function CartProvider({ children }) {
 
     async function refreshCartCount() {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/cart");
-            const totalItems = data.items.length;
-            setCartCount(totalItems);
-
+            const { data } = await axios.get("http://localhost:5000/api/cart", {
+                withCredentials: true
+            });
+            const totalItems = data.items ? data.items.length : 0;
             setCartCount(totalItems);
         } catch (error) {
-            console.log(error);
+            setCartCount(0);
         }
     }
 
     useEffect(() => {
         refreshCartCount();
-    }, []);
+    }, [cartCount]);
 
     return (
         <CartContext.Provider value={{ cartCount, refreshCartCount }}>

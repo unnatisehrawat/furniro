@@ -3,7 +3,6 @@
 import { MapPin, Phone, Clock } from "lucide-react"
 import { useState } from "react";
 import axios from "axios";
-import { TEXT } from "@/constants/text";
 
 export default function ContactForm(){
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,11 +29,11 @@ export default function ContactForm(){
         
         try {
             await axios.post("http://localhost:5000/api/leads", formData);
-            alert(TEXT.CONTACT_FORM.SUCCESS);
+            alert("Lead submitted successfully");
             setFormData({ name: "", email: "", subject: "", message: "" });
         } catch (error) {
             console.error("Failed to send message:", error);
-            alert(TEXT.CONTACT_FORM.ERROR);
+            alert("Failed to submit lead");
         } finally {
             setIsSubmitting(false);
         }
@@ -45,9 +44,9 @@ export default function ContactForm(){
             
             
             <div className="text-center max-w-2xl mx-auto mb-20">
-                <h2 className="text-4xl font-bold mb-4">{TEXT.CONTACT_FORM.TITLE}</h2>
+                <h2 className="text-4xl font-bold mb-4">Get In Touch With Us</h2>
                 <p className="text-gray-400">
-                    {TEXT.CONTACT_FORM.SUBTITLE}
+                    For More Information About Our Product & Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!
                 </p>
             </div>
 
@@ -143,7 +142,7 @@ export default function ContactForm(){
                                     : "hover:bg-[#9c7827] cursor-pointer active:scale-95"
                             }`}
                         >
-                            {isSubmitting ? TEXT.CONTACT_FORM.BUTTON_SUBMITTING : TEXT.CONTACT_FORM.BUTTON_SUBMIT}
+                            {isSubmitting ? "Submitting..." : "Submit"}
                         </button>
                     </form>
                 </div>

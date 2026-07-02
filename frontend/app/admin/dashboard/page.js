@@ -33,12 +33,14 @@ export default function AdminPage() {
 
     return (
         <>
-            <div className="p-4">
-                <p className="text-2xl font-semibold">Overview</p>
-                <p className="text-3xl mt-10 font-semibold">Store Analytics</p>
+            <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
+                <div className="mx-4 mt-4">
+                    <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
+                    <p className="text-gray-500 mt-2">Welcome back! Here is your store analytics.</p>
+                </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 pb-8">
                 <StatsCard
                     title="Total Categories"
                     value={counts.categories}

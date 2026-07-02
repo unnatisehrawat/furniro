@@ -3,8 +3,6 @@ import { usePathname } from "next/navigation";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import axios from "axios";
-
-
 import { AuthProvider, AuthGuard } from "../context/AuthContext";
 
 export default function AdminLayout({ children }) {

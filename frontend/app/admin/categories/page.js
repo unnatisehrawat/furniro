@@ -21,10 +21,10 @@ export default function Category(){
 
     return(
         <>
-       <div className="flex justify-between items-center mb-8">
+       <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
         <div className="mx-4 mt-4">
-            <h1 className="text-3xl font-bold"> Category Management</h1>
-            <p className="text-gray-500 mt-3">Organise and manage categories</p>
+            <h1 className="text-3xl font-bold text-gray-800">Category Management</h1>
+            <p className="text-gray-500 mt-2">Organise and manage your store's categories</p>
         </div>
         <button className="mx-8 text-white bg-admin-brand px-4 py-2 cursor-pointer rounded-2xl"
         onClick={() => setOpen(true)}>

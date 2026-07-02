@@ -12,6 +12,7 @@ import categoryRoutes from "./routes/categoryRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
 import leadRoutes from "./routes/leadRoutes.js"
+import { initializeAdminUser } from "./services/authService.js";
 
 
 
@@ -21,8 +22,11 @@ app.use(cors({
 }))
 app.use(express.json());
 app.use(cookieParser());
-connectDB()
 
+// Connect to MongoDB and then seed the Admin user
+connectDB().then(() => {
+    initializeAdminUser();
+});
 
 app.get("/", (req, res) => {
     res.send("server is running")
@@ -34,10 +38,8 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/leads", leadRoutes)
 app.use("/api/auth", authRoutes);
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
-
-
 })

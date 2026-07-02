@@ -1,5 +1,13 @@
+import { Poppins } from 'next/font/google';
 import { CartProvider } from "./context/CartContext";
-import "./globals.css";  // 
+import { AuthProvider } from "./context/AuthContext";
+import "./globals.css";
+
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata = {
   title: "Furniro",
@@ -9,10 +17,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <CartProvider>
-          {children}
-        </CartProvider>
+      <body className={poppins.className}>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

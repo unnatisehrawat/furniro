@@ -11,7 +11,7 @@ export default function ShareModal({ productId, productName }) {
     async function handleCopy() {
         await navigator.clipboard.writeText(url)
         setCopied(true)
-        setTimeout(() => setCopied(false), 2000)  
+        setTimeout(() => setCopied(false), 2000)
     }
 
     function handleWhatsApp() {
@@ -29,7 +29,7 @@ export default function ShareModal({ productId, productName }) {
                 Share
             </button>
 
-    
+
             {open && (
                 <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
                     <div className="bg-white rounded-xl p-8 w-105 shadow-xl">
@@ -65,7 +65,7 @@ export default function ShareModal({ productId, productName }) {
                             <p className="text-green-500 text-sm mt-2">Link copied!</p>
                         )}
 
-                    
+
                         <button
                             onClick={handleWhatsApp}
                             className="mt-6 w-full flex items-center justify-center gap-3 bg-[#25D366] text-white py-3 rounded-lg font-semibold hover:bg-[#1ebe5d] transition cursor-pointer"

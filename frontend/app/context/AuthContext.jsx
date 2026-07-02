@@ -1,64 +1,62 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-
+import { useRouter, usePathname } from "next/navigation";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
+    const pathname = usePathname();
+
+    const verifyAuth = async () => {
+        try {
+            const { data } = await axios.get("http://localhost:5000/api/auth/verify", {
+                withCredentials: true
+            });
+            setUser(data.user);
+        } catch (error) {
+            setUser(null);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const verifyAuth = async () => {
-            try {
-                
-                await axios.get("http://localhost:5000/api/auth/verify", {
-                    withCredentials: true // MUST send cookies
-                });
-                setIsAuthenticated(true);
-            } catch (error) {
-                
-                setIsAuthenticated(false);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         verifyAuth();
-    }, []);
+    }, [pathname]);
 
     const logout = async () => {
         try {
             await axios.post("http://localhost:5000/api/auth/logout", {}, { withCredentials: true });
-            setIsAuthenticated(false);
-            router.push("/admin");
+            setUser(null);
+            router.push("/");
         } catch (error) {
             console.error("Logout failed", error);
         }
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, isLoading, setIsAuthenticated, logout }}>
+        <AuthContext.Provider value={{ user, setUser, isLoading, logout, verifyAuth }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthGuard = ({ children }) => {
-    const { isAuthenticated, isLoading } = useAuth();
+    const { user, isLoading } = useAuth();
     const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
-        if (!isLoading && !isAuthenticated) {
+        if (!isLoading && (!user || user.role !== "admin")) {
             router.push("/admin");
         }
-    }, [isAuthenticated, isLoading, router]);
+    }, [user, isLoading, router, pathname]);
 
     if (isLoading) {
         return (
@@ -68,11 +66,9 @@ export const AuthGuard = ({ children }) => {
         );
     }
 
-    
-    if (!isAuthenticated) {
+    if (!user || user.role !== "admin") {
         return null; 
     }
 
-    
     return children;
 };
