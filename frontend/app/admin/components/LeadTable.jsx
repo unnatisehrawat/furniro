@@ -22,7 +22,7 @@ export default function LeadTable({ leads, refresh }) {
         <>
             <div className="p-6 overflow-x-auto">
                 <table className="w-full border border-gray-300">
-                    <thead className="text-white bg-[#6E4C3A]">
+                    <thead className="text-white bg-admin-brand">
                         <tr>
                             <th className="p-4 border border-gray-300">S.No</th>
                             <th className="border border-gray-300">Date</th>

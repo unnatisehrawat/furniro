@@ -1,4 +1,7 @@
 @import "tailwindcss";
 
-
-
+:root {
+  --color-brand: #B88E2F;
+  --color-admin-brand: #6E4C3A;
+  --color-admin-bg: #F8F5F1;
+}

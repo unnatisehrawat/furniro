@@ -104,7 +104,7 @@ export default function AddProductModal({close, refresh, categories}){
                             onClick={() => toggleSize(size)}
                             className={`px-3 py-1 rounded border cursor-pointer ${
                                 sizes.includes(size) 
-                                ? "bg-[#6E4C3A] text-white" 
+                                ? "bg-admin-brand text-white" 
                                 : "bg-white text-black"
                             }`}
                         >

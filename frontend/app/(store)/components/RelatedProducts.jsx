@@ -64,7 +64,7 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center">
                                 <button
                                     onClick={() => handleAddToCart(product._id)}
-                                    className="bg-white text-[#B88E2F] font-semibold px-8 py-3 cursor-pointer hover:bg-[#B88E2F] hover:text-white transition-colors"
+                                    className="bg-white text-brand font-semibold px-8 py-3 cursor-pointer hover:bg-brand hover:text-white transition-colors"
                                 >
                                     Add to Cart
                                 </button>
@@ -95,7 +95,7 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
             <div className="flex justify-center mt-12">
                 <Link
                     href={`/shop?category=${categoryId}`}
-                    className="border border-[#B88E2F] text-[#B88E2F] px-16 py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition"
+                    className="border border-brand text-brand px-16 py-3 font-semibold hover:bg-brand hover:text-white transition"
                 >
                     Show More
                 </Link>

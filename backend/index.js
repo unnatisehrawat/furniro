@@ -1,6 +1,8 @@
 import dotenv from "dotenv"
 import express from "express"
 import cors from "cors"
+import cookieParser from "cookie-parser";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config()
 
@@ -15,11 +17,10 @@ import leadRoutes from "./routes/leadRoutes.js"
 
 const app = express();
 app.use(cors({
-    origin : "http://localhost:3000"
-}
-
-))
+    origin: "http://localhost:3000", credentials: true
+}))
 app.use(express.json());
+app.use(cookieParser());
 connectDB()
 
 
@@ -30,7 +31,8 @@ app.get("/", (req, res) => {
 app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
-app.use("/api/leads" , leadRoutes)
+app.use("/api/leads", leadRoutes)
+app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT
 

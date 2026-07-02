@@ -26,7 +26,7 @@ export default function Category(){
             <h1 className="text-3xl font-bold"> Category Management</h1>
             <p className="text-gray-500 mt-3">Organise and manage categories</p>
         </div>
-        <button className="mx-8 text-white bg-[#6E4C3A] px-4 py-2 cursor-pointer rounded-2xl"
+        <button className="mx-8 text-white bg-admin-brand px-4 py-2 cursor-pointer rounded-2xl"
         onClick={() => setOpen(true)}>
             + Add Category
 

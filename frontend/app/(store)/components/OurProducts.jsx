@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react";
 import ShareModal from "./ShareModal";
+import { TEXT } from "@/constants/text";
 
 export default function OurProducts() {
     const [products, setProducts] = useState([]);
@@ -34,7 +35,7 @@ export default function OurProducts() {
     return (
         <section className="max-w-7xl mx-auto py-20">
             <h2 className="text-4xl font-bold text-center mb-12">
-                Our Products
+                {TEXT.OUR_PRODUCTS.TITLE}
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -55,7 +56,7 @@ export default function OurProducts() {
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center">
                                 <button
                                     onClick={() => handleAddToCart(product._id)}
-                                    className="bg-white text-[#B88E2F] font-semibold px-8 py-3 cursor-pointer"
+                                    className="bg-white text-brand font-semibold px-8 py-3 cursor-pointer"
                                 >
                                     Add to Cart
                                 </button>
@@ -91,9 +92,9 @@ export default function OurProducts() {
             <div className="flex justify-center mt-14">
                 <Link
                     href="/shop"
-                    className="border border-[#B88E2F] text-[#B88E2F] px-16 py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition"
+                    className="border border-brand text-brand px-16 py-3 font-semibold hover:bg-brand hover:text-white transition"
                 >
-                    Show More
+                    {TEXT.OUR_PRODUCTS.SHOW_MORE}
                 </Link>
             </div>
         </section>

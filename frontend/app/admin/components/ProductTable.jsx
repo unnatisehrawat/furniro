@@ -16,7 +16,7 @@ export default function ProductTable({products, refresh}){
         <>
         <div className="p-6">
             <table className="w-full border border-gray-300 rounded-xl ">
-                <thead className="text-white bg-[#6E4C3A]">
+                <thead className="text-white bg-admin-brand">
                     <tr>
                         <th className="p-4 border border-gray-300">S.No</th>
                         <th className="p-4 border border-gray-300">Name</th>

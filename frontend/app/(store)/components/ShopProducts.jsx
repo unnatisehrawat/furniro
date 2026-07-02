@@ -83,7 +83,7 @@ export default function ShopProducts() {
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center">
                                 <button
                                     onClick={() => handleAddToCart(product._id)}
-                                    className="bg-white text-[#B88E2F] font-semibold px-8 py-3 cursor-pointer"
+                                    className="bg-white text-brand font-semibold px-8 py-3 cursor-pointer"
                                 >
                                     Add to Cart
                                 </button>
@@ -128,7 +128,7 @@ export default function ShopProducts() {
                         key={index}
                         onClick={() => setPage(index + 1)}
                         className={`w-12 h-12  cursor-pointer rounded ${page === index + 1
-                            ? "bg-[#B88E2F] text-white"
+                            ? "bg-brand text-white"
                             : "bg-[#F9F1E7]"
                             }`}
                     >

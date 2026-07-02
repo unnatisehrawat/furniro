@@ -88,7 +88,7 @@ export default function ProductPage() {
 
                         <button
                             onClick={handleAddToCart}
-                            className="mt-10 bg-[#B88E2F] text-white px-12 py-4 font-semibold cursor-pointer"
+                            className="mt-10 bg-brand text-white px-12 py-4 font-semibold cursor-pointer"
                         >
                             Add To Cart
                         </button>

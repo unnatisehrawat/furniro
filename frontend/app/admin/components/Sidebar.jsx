@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Package, Grid2X2, User, Mail, LayoutDashboard } from "lucide-react"
+import { TEXT } from "@/constants/text"
 
 
 
@@ -11,24 +12,24 @@ export default function Sidebar() {
 
     const menuItems = [
         {
-            name: "Dashboard",
+            name: TEXT.ADMIN_SIDEBAR.LINKS.DASHBOARD,
             href: "/admin/dashboard",
             icon: <LayoutDashboard size={18} />
         },
         {
-            name: "Categories",
+            name: TEXT.ADMIN_SIDEBAR.LINKS.CATEGORIES,
             href: "/admin/categories",
             icon: <Grid2X2 size={18} />
         },
         {
 
-            name: "Products",
+            name: TEXT.ADMIN_SIDEBAR.LINKS.PRODUCTS,
             href: "/admin/products",
             icon: <Package size={18} />
 
         },
         {
-            name: "Leads",
+            name: TEXT.ADMIN_SIDEBAR.LINKS.LEADS,
             href: "/admin/leads",
             icon: <Mail size={18} />
         }
@@ -39,9 +40,9 @@ export default function Sidebar() {
             <aside className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col justify-between sticky top-0">
                 <div>
                     <div className="px-8 py-6">
-                        <h1 className="text-3xl font-bold tracking-wide text-[#6E4C3A] "> FURNIRO</h1>
+                        <h1 className="text-3xl font-bold tracking-wide text-admin-brand "> {TEXT.ADMIN_SIDEBAR.LOGO}</h1>
                         <p className="text-sm text-gray-500 mt-1">
-                            Admin Portal
+                            {TEXT.ADMIN_SIDEBAR.SUBTITLE}
                         </p>
                     </div>
                     <nav className="px-4 flex flex-col space-y-2">
@@ -52,7 +53,7 @@ export default function Sidebar() {
                                     key={items.name}
                                     href={items.href}
                                     className={` flex items-center gap-3 px-4 py-3 rounded-lg transition
-                                ${active ? "bg-[#6E4C3A] text-white" :
+                                ${active ? "bg-admin-brand text-white" :
                                             "text-gray-600 hover:bg-gray-200"
                                         }
                                 `}
@@ -65,11 +66,11 @@ export default function Sidebar() {
                     </nav>
                 </div>
                 <div className="text-gray-600 font-semibold flex items-center  gap-6 border-t border-gray-200 p-6">
-                    <div className=" w-10 h-10 flex items-center justify-center rounded-full bg-[#6E4C3A] text-white">
+                    <div className=" w-10 h-10 flex items-center justify-center rounded-full bg-admin-brand text-white">
                         <User size={18} />
                     </div>
 
-                    <h3> Admin User</h3>
+                    <h3> {TEXT.ADMIN_SIDEBAR.USER}</h3>
                 </div>
 
 

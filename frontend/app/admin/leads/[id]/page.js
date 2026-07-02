@@ -51,7 +51,7 @@ export default function LeadDetails() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div className="flex items-start gap-4">
-                        <div className="bg-orange-50 p-3 rounded-lg text-[#B88E2F]">
+                        <div className="bg-orange-50 p-3 rounded-lg text-brand">
                             <User size={24} />
                         </div>
                         <div>
@@ -61,7 +61,7 @@ export default function LeadDetails() {
                     </div>
 
                     <div className="flex items-start gap-4">
-                        <div className="bg-orange-50 p-3 rounded-lg text-[#B88E2F]">
+                        <div className="bg-orange-50 p-3 rounded-lg text-brand">
                             <Mail size={24} />
                         </div>
                         <div>
@@ -73,7 +73,7 @@ export default function LeadDetails() {
                     </div>
 
                     <div className="flex items-start gap-4">
-                        <div className="bg-orange-50 p-3 rounded-lg text-[#B88E2F]">
+                        <div className="bg-orange-50 p-3 rounded-lg text-brand">
                             <Calendar size={24} />
                         </div>
                         <div>
@@ -90,7 +90,7 @@ export default function LeadDetails() {
                 {/* Message Section */}
                 <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
                     <div className="flex items-center gap-3 mb-4">
-                        <MessageSquare size={20} className="text-[#B88E2F]" />
+                        <MessageSquare size={20} className="text-brand" />
                         <h3 className="text-xl font-bold text-gray-800">
                             {lead.subject || "No Subject Provided"}
                         </h3>

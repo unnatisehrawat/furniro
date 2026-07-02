@@ -22,7 +22,7 @@ export default function Range(){
     }
     return(
         <>
-        <section className="py-20  mx-auto bg-[#F8F5F1]">
+        <section className="py-20  mx-auto bg-admin-bg">
             <h2 className="text-4xl font-bold text-center">Browse the Range</h2>
             <p className="text-gray-500 text-center mt-3">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
