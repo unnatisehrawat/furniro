@@ -44,7 +44,7 @@ export default function ShopProducts() {
         try {
             const { data } = await axios.get("http://localhost:5000/api/products");
             setProducts(data);
-            setPage(1); 
+            setPage(1);
         } catch (err) {
             console.log(err);
         }
@@ -64,7 +64,7 @@ export default function ShopProducts() {
     // Filter by Selected Categories
     let processedProducts = [...products];
     if (selectedCategories.length > 0) {
-        processedProducts = processedProducts.filter(p => 
+        processedProducts = processedProducts.filter(p =>
             selectedCategories.includes(p.categoryId?._id || p.categoryId)
         );
     }
@@ -83,7 +83,7 @@ export default function ShopProducts() {
 
     return (
         <>
-            <FilterBar 
+            <FilterBar
                 totalResults={processedProducts.length}
                 firstItemIndex={processedProducts.length > 0 ? first + 1 : 0}
                 lastItemIndex={last}
@@ -141,7 +141,7 @@ export default function ShopProducts() {
                             </Link>
                         </div>
                     ))}
-                    
+
                     {currentProducts.length === 0 && (
                         <div className="col-span-full text-center py-20 text-gray-500 text-lg">
                             No products found matching your filter criteria.
@@ -155,11 +155,10 @@ export default function ShopProducts() {
                             <button
                                 key={index}
                                 onClick={() => setPage(index + 1)}
-                                className={`w-12 h-12 cursor-pointer rounded transition-colors ${
-                                    page === index + 1
+                                className={`w-12 h-12 cursor-pointer rounded transition-colors ${page === index + 1
                                         ? "bg-[#B88E2F] text-white"
                                         : "bg-[#F9F1E7] text-black hover:bg-[#f0e2d1]"
-                                }`}
+                                    }`}
                             >
                                 {index + 1}
                             </button>

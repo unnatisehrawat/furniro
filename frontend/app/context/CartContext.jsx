@@ -21,7 +21,7 @@ export function CartProvider({ children }) {
 
     useEffect(() => {
         refreshCartCount();
-    }, [cartCount]);
+    }, []);
 
     return (
         <CartContext.Provider value={{ cartCount, refreshCartCount }}>

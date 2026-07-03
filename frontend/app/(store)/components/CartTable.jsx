@@ -1,9 +1,11 @@
 "use client"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useCart } from "../../context/CartContext"
 
 export default function CartTable(){
     const [cart, setCart] = useState({ items: [] }) 
+    const { refreshCartCount } = useCart()
 
     useEffect(() => {
         getCart()
@@ -22,7 +24,8 @@ export default function CartTable(){
     async function removeFromCart(productId) {
         try {
             await axios.delete(`http://localhost:5000/api/cart/${productId}`, { withCredentials: true })
-            getCart()   
+            getCart()
+            refreshCartCount()
         } catch (error) {
             console.log(error)
             alert("Failed to remove item")
@@ -33,6 +36,14 @@ export default function CartTable(){
     
     
     
+
+    if (items.length === 0) {
+        return (
+            <div className="p-6 text-center py-20 text-gray-500 text-xl font-medium">
+                Cart is empty
+            </div>
+        )
+    }
 
     return(
         <div className="p-6">

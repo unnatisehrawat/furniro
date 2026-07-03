@@ -8,7 +8,7 @@ export default function StatsCard({ title, value, link }) {
     if (title.toLowerCase().includes("product")) Icon = Package;
     if (title.toLowerCase().includes("lead")) Icon = Mail;
 
-    return (
+    return (        
         <Link 
             href={link || "#"} 
             className="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col h-full relative overflow-hidden"

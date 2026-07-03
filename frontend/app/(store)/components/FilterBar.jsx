@@ -52,13 +52,13 @@ export default function FilterBar({
 
     return (
         <div className="w-full bg-[#F9F1E7] py-6 px-4 md:px-20 mt-0 flex flex-col md:flex-row justify-between items-center gap-6 z-10 relative">
-            
+
             {/* Left Side: Filter, View Toggles, Results Text */}
             <div className="flex flex-wrap items-center gap-6">
-                
+
                 {/* Filter Dropdown */}
                 <div className="relative" ref={dropdownRef}>
-                    <button 
+                    <button
                         onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
                         className="flex items-center gap-2 hover:opacity-70 transition cursor-pointer"
                     >
@@ -75,21 +75,21 @@ export default function FilterBar({
                         <div className="absolute top-10 left-0 bg-white border border-gray-200 shadow-xl rounded-xl w-56 py-3 z-50">
                             <div className="px-4 pb-2 mb-2 border-b border-gray-100 flex justify-between items-center">
                                 <span className="font-bold text-gray-800">Categories</span>
-                                <button 
+                                <button
                                     onClick={() => setSelectedCategories([])}
                                     className="text-xs text-red-500 hover:text-red-700 cursor-pointer"
                                 >
                                     Clear
                                 </button>
                             </div>
-                            
+
                             <div className="max-h-60 overflow-y-auto">
                                 {categories.map(cat => (
-                                    <label 
+                                    <label
                                         key={cat._id}
                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition cursor-pointer"
                                     >
-                                        <input 
+                                        <input
                                             type="checkbox"
                                             checked={selectedCategories.includes(cat._id)}
                                             onChange={() => toggleCategory(cat._id)}
@@ -114,21 +114,10 @@ export default function FilterBar({
 
             {/* Right Side: Show and Sort */}
             <div className="flex flex-wrap items-center gap-6">
-                
-                <div className="flex items-center gap-3">
-                    <span className="text-sm text-gray-800">Show</span>
-                    <input 
-                        type="number" 
-                        value={itemsPerPage}
-                        onChange={(e) => setItemsPerPage(Number(e.target.value) || 6)}
-                        min={1}
-                        className="w-14 h-12 bg-white text-center rounded outline-none border-none text-gray-600 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    />
-                </div>
 
                 <div className="flex items-center gap-3">
                     <span className="text-sm text-gray-800">Sort by</span>
-                    <select 
+                    <select
                         value={sortOption}
                         onChange={(e) => setSortOption(e.target.value)}
                         className="h-12 px-4 bg-white rounded outline-none border-none text-gray-600 cursor-pointer w-48"

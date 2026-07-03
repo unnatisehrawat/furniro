@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
     const pathname = usePathname();
 
     const verifyAuth = async () => {
+        setIsLoading(true);
         try {
             const { data } = await axios.get("http://localhost:5000/api/auth/verify", {
                 withCredentials: true
@@ -53,9 +54,16 @@ export const AuthGuard = ({ children }) => {
     const pathname = usePathname();
 
     useEffect(() => {
-        if (!isLoading && (!user || user.role !== "admin")) {
+        if (isLoading) return;
+        
+        if (!user) {
             router.push("/admin");
+            return;
         }
+
+        if (user.role !== "admin") {
+            router.push("/");
+        } 
     }, [user, isLoading, router, pathname]);
 
     if (isLoading) {

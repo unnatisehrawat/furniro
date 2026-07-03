@@ -2,8 +2,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 export default function AdminAuthPage() {
   const router = useRouter();
+  const { verifyAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,6 +24,7 @@ export default function AdminAuthPage() {
       );
       
       if (response.data.role === "admin") {
+        await verifyAuth();
         router.push("/admin/dashboard");
       } else {
         setError("You are not authorized as an admin.");
